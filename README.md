@@ -22,10 +22,15 @@ Role Variables
 | `endpoint`     | required             | Endpoint for the BindPlane OP server's OpAMP interface.                                                             | 
 | `secret_key`   | required             | The BindPlane OP secret key.                                                                                        | 
 | `labels`       | optional             | Labels assigned to the agent.                                                                                       |
-| `cacert`       | optional             | x509 PEM encoded CA certificate, used to trust the BindPlane OP's certificate.                                      |
-| `tlscert`      | optional             | x509 PEM encoded certificate file path, used for mutual TLS authentication.                                         |
-| `tlskey`       | optional             | x509 PEM encoded private key file path, used for mutual TLS authentication.                                         |
+| `cacert`       | optional             | Path to x509 PEM encoded CA certificate, used to trust the BindPlane OP's certificate.                              |
+| `tlscert`      | optional             | Path to x509 PEM encoded certificate file path, used for mutual TLS authentication.                                 |
+| `tlskey`       | optional             | Path to x509 PEM encoded private key file path, used for mutual TLS authentication.                                 |
 | `insecure_skip_verify` | optional     | Whether or not to skip verification of TLS certificates. |
+
+## Documentation
+
+- [Usage](./docs/USAGE.md)
+- [Developing](./docs/DEVELOPING.md)
 
 ## License
 

@@ -1,0 +1,11 @@
+- name: test
+  hosts: all
+  become: true
+  tasks:
+    - name: Install agent
+      include_role:
+        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
+      vars:
+        version: "1.28.0"
+        endpoint: wss://app.bindplane.com/v1/opamp
+        secret_key: 01GR6ZD70WVPCTA0EFT6MMJZEK

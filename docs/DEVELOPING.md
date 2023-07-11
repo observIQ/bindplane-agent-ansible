@@ -1,6 +1,8 @@
 ## Developing
 
-### Testing
+### Testing w/ Molecule
+
+The Molecule test framework is used for integration testing. https://github.com/ansible-community/molecule.
 
 #### Setup
 
@@ -40,7 +42,6 @@ Export the following environment variables using a `.env` file in the repo's roo
 export GCP_PROJECT_ID=<project id>
 export GOOGLE_APPLICATION_CREDENTIALS=<path to service account json key>
 export SSH_KEY_FILE=<path to private ssh key used by gcp service account>
-export OIQ_SECRET_KEY=<oiq cloud secret key>
 export SSH_USER=sa_<service account's id>
 export GCP_AUTH_KIND=serviceaccount
 ```
@@ -49,9 +50,9 @@ export GCP_AUTH_KIND=serviceaccount
 
 Make sure [gcloud ssh is configured](https://cloud.google.com/sdk/gcloud/reference/compute/config-ssh?hl=zh-tw)
 
-#### Run Tests Locally
+#### Run Tests
 
-Local testing will use the service account for instance deployment and your personal 
+Testing will use the service account for instance deployment and your personal 
 account for ssh and executing ansible.
 
 - molecule create

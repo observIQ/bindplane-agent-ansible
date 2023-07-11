@@ -1,0 +1,21 @@
+---
+- name: Include vars
+  include_vars:
+    file: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}/vars/main.yml"
+
+- name: Stat manager.yaml
+  stat:
+    path: "/opt/observiq-otel-collector/manager.yaml"
+  register: result
+- name: Assert manager.yaml exists
+  assert:
+    that: result.stat.exists
+
+- name: Ensure the agent is running
+  service:
+    name: "observiq-otel-collector.service"
+    state: started
+  register: result
+- name: Assert the agent was already running
+  assert:
+    that: result.changed == false
