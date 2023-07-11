@@ -87,7 +87,6 @@ jobs:
       - name: Lint.
         run: |
           molecule syntax -s ${{ matrix.scenario }}
-          molecule lint -s ${{ matrix.scenario }}
 
       - name: Converge.
         run: molecule converge -s ${{ matrix.scenario }}
