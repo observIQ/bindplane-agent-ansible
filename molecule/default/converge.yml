@@ -8,4 +8,4 @@
       vars:
         version: "1.28.0"
         endpoint: wss://app.bindplane.com/v1/opamp
-        secret_key: {{ lookup('env', 'OPAMP_SECRET_KEY') }}
+        secret_key: "{{ lookup('env', 'OPAMP_SECRET_KEY') }}"
