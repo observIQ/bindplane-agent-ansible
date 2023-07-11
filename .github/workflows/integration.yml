@@ -36,11 +36,11 @@ jobs:
       - name: Checkout the codebase.
         uses: actions/checkout@v2
 
-      # - name: Install python version
-      #   uses: gabrielfalcao/pyenv-action@v8
-      #   with:
-      #     default: "3.9.4"
-      #     command: pip install -U pip # upgrade pip after installing python
+      - name: Install python version
+        uses: gabrielfalcao/pyenv-action@v8
+        with:
+          default: "3.9.4"
+          command: pip install -U pip # upgrade pip after installing python
 
       - name: Install Gcloud SDK
         uses: google-github-actions/setup-gcloud@v1.1.1
