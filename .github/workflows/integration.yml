@@ -15,9 +15,13 @@ on:
       - '.gitignore'
       - 'LICENSE'
 
+concurrency:
+  group: ${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
 env:
   GCP_PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
-  OIQ_SECRET_KEY: ${{secrets.OIQ_SECRET_KEY}}
+  OPAMP_SECRET_KEY: ${{secrets.OPAMP_SECRET_KEY}}
   SSH_KEY_FILE: id_rsa
   SSH_USER: ${{secrets.SSH_USER}}
 
