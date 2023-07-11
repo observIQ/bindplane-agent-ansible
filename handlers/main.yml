@@ -5,13 +5,3 @@
     state: restarted
     daemon_reload: true
     enabled: yes
-
-# manager.yaml is dynamically configured by remote platforms when not in headless
-# mode, so we only call this handler to update it when there is a change to 
-# manager.json, which contains user configured options.
-- name: "create manager.yaml"
-  template:
-    src: "manager.yaml.tmpl"
-    dest: "{{ install_dir }}/manager.yaml"
-    mode: 0640
-  notify: "restart bindplane agent"

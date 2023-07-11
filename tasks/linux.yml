@@ -25,16 +25,10 @@
   - ansible_os_family == 'Debian'
   notify: "restart bindplane agent"
 
-# Store configuration options as a json file, changes to
-# this file will trigger an update to manager.yaml. If no
-# changes are made, manager.yaml will not be changed. This
-# allows a remote platform to modify manager.yaml without
-# risk of Ansible reverting the changes.
-- name: Create manager.json
+- name: "create manager.yaml"
   template:
-    src: "manager.json.tmpl"
-    dest: "{{ install_dir }}/manager.json"
+    src: "manager.yaml.tmpl"
+    dest: "{{ install_dir }}/manager.yaml"
     mode: 0640
-  register: remote_json
-  notify: "create manager.yaml"
+  notify: "restart bindplane agent"
 
