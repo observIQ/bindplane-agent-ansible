@@ -6,7 +6,15 @@ secret_key: "{{ secret_key }}"
 agent_id: "{{ agent_id }}"
 labels: "{{ labels }}"
 tls_config:
+  {%- if tlscert != "" -%}
   cert_file: "{{ tlscert }}"
+  {%- end %-}
+  {%- if tlskey != "" -%}
   key_file: "{{ tlskey }}"
+  {%- end %-}
+  {%- if cacert != "" -%}
   ca_file: "{{ cacert }}"
-  insecure_skip_verify: {{ insecure_skip_verify }}
+  {%- end %-}
+  {%- if tlscert == True -%}
+  insecure_skip_verify: true
+  {%- end %-}
