@@ -1,23 +1,13 @@
-# platform endpoint
-endpoint: "{{ endpoint }}"
-
-# platform secret key
-secret_key: "{{ secret_key }}"
-
-# agent uuid
-agent_id: "{{ agent_id }}"
-
-# labels for platforms that accept them
-labels: "{{ labels }}"
-
-# TLS configuration
+# Managed by Ansible. Changes to this file will result in
+# reconfiguration when Ansible is executed.
 #
-# x509 PEM certificate file path
-tlscert: "{{ tlscert }}"
-
-# x509 PEM private key file path
-tlskey: "{{ tlskey }}"
-
-# x509 PEM certificate authority file path
-cacert: "{{ cacert }}"
+endpoint: "{{ endpoint }}"
+secret_key: "{{ secret_key }}"
+agent_id: "{{ agent_id }}"
+labels: "{{ labels }}"
+tls_config:
+  cert_file: "{{ tlscert }}"
+  key_file: "{{ tlskey }}"
+  ca_file: "{{ cacert }}"
+  insecure_skip_verify: {{ insecure_skip_verify }}
 

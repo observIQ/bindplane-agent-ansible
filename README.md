@@ -26,6 +26,7 @@ Role Variables
 | `cacert`       | optional                             | x509 PEM encoded CA certificate, used to trust the BindPlane OP's certificate. Only required if the certificate authority is not already trusted by the agent's operating system. |
 | `tlscert`      | optional                             | x509 PEM encoded certificate file path, used for mutual TLS authentication.                                         |
 | `tlskey`       | optional                             | x509 PEM encoded private key file path, used for mutual TLS authentication.                                         |
+| `insecure_skip_verify` | optional                     | Whether or not to skip verification of TLS certificates. |
 
 ## License
 
