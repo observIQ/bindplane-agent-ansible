@@ -25,10 +25,23 @@
   - ansible_os_family == 'Debian'
   notify: "restart bindplane agent"
 
-- name: "create manager.yaml"
+- name: Create observiq-otel-collector.service.d directory
+  file:
+    path: /etc/systemd/system/observiq-otel-collector.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+# Use environment variables to configure OpAMP instead of writing
+# a manager.yaml. This allows the BindPlane OP server to push changes
+# to the manager config without competing with Ansible.
+- name: "Create systemd environment override"
   template:
-    src: "manager.yaml.tmpl"
-    dest: "{{ install_dir }}/manager.yaml"
+    src: "override.conf.tmpl"
+    dest: /etc/systemd/system/observiq-otel-collector.service.d/override.conf
+    owner: root
+    group: root
     mode: 0640
   notify: "restart bindplane agent"
 

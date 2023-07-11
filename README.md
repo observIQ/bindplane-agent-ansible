@@ -16,17 +16,16 @@ git clone https://github.com/observIQ/bindplane-agent-ansible.git roles/bindplan
 Role Variables
 --------------
 
-| Name           | Default Value                        | Description                                                                                                         | 
-| -------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------  |
-| `version`      | required                             | The `version` is required to specify which version of the agent to install. Supported versions: `1.28.0` or newer.  | 
-| `endpoint`     | required                             | Endpoint for the BindPlane OP server's OpAMP interface.                                                             | 
-| `secret_key`   | required                             | The BindPlane OP secret key.                                                                                        | 
-| `agent_id`     | required                             | A ULID to assign to the agent as its unique ID.                                                                     |
-| `labels`       | required                             | Labels assigned to the agent.                                                                                       |
-| `cacert`       | optional                             | x509 PEM encoded CA certificate, used to trust the BindPlane OP's certificate. Only required if the certificate authority is not already trusted by the agent's operating system. |
-| `tlscert`      | optional                             | x509 PEM encoded certificate file path, used for mutual TLS authentication.                                         |
-| `tlskey`       | optional                             | x509 PEM encoded private key file path, used for mutual TLS authentication.                                         |
-| `insecure_skip_verify` | optional                     | Whether or not to skip verification of TLS certificates. |
+| Name           | Default Value        | Description                                                                                                         | 
+| -------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------  |
+| `version`      | required             | The `version` is required to specify which version of the agent to install. Supported versions: `1.28.0` or newer.  | 
+| `endpoint`     | required             | Endpoint for the BindPlane OP server's OpAMP interface.                                                             | 
+| `secret_key`   | required             | The BindPlane OP secret key.                                                                                        | 
+| `labels`       | optional             | Labels assigned to the agent.                                                                                       |
+| `cacert`       | optional             | x509 PEM encoded CA certificate, used to trust the BindPlane OP's certificate.                                      |
+| `tlscert`      | optional             | x509 PEM encoded certificate file path, used for mutual TLS authentication.                                         |
+| `tlskey`       | optional             | x509 PEM encoded private key file path, used for mutual TLS authentication.                                         |
+| `insecure_skip_verify` | optional     | Whether or not to skip verification of TLS certificates. |
 
 ## License
 

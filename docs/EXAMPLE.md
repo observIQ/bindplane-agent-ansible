@@ -17,7 +17,6 @@ playbook.yml
       version: "1.28.0"
       endpoint: "ws://localhost:3001/v1/opamp"
       secret_key: "01H4P9QCXQNNQ1GE3BA34GR4EK"
-      agent_id: "01H534EAD5WYZ02QVQKKE6VEY6"
       labels: "configuration=ansible"
 ```
 
