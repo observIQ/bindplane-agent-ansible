@@ -1,7 +1,7 @@
 Ansible Role For [BindPlane Agent](https://github.com/observIQ/observiq-otel-collector)
 ==========================
 
-[![Integration Tests](https://github.com/observIQ/observiq-agent-ansible/actions/workflows/integration.yml/badge.svg)](https://github.com/observIQ/observiq-agent-ansible/actions/workflows/integration.yml)
+[![Integration Tests](https://github.com/observIQ/bindplane-agent-ansible/actions/workflows/integration.yml/badge.svg)](https://github.com/observIQ/bindplane-agent-ansible/actions/workflows/integration.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 This Ansible role installs the [BindPlane Agent](https://github.com/observIQ/observiq-otel-collector).
