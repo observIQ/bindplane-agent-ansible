@@ -1,0 +1,40 @@
+---
+- name: Install RHEL package
+  yum:
+    name: "{{ package_url }}"
+    state: present
+    disable_gpg_check: true
+  when: 
+  - ansible_os_family == "RedHat"
+  notify: "restart observiq-agent agent"
+
+- name: Install SUSE package
+  zypper:
+    name: "{{ package_url }}"
+    state: present
+    disable_gpg_check: true
+  when: 
+  - ansible_os_family == "Suse"
+  notify: "restart observiq-agent agent"
+
+- name: Install Debian package
+  apt:
+    deb: "{{ package_url }}"
+    state: present
+  when: 
+  - ansible_os_family == 'Debian'
+  notify: "restart observiq-agent agent"
+
+# Store configuration options as a json file, changes to
+# this file will trigger an update to manager.yaml. If no
+# changes are made, manager.yaml will not be changed. This
+# allows a remote platform to modify manager.yaml without
+# risk of Ansible reverting the changes.
+- name: Create manager.json
+  template:
+    src: "manager.json.tmpl"
+    dest: "{{ install_dir }}/manager.json"
+    mode: 0640
+  register: remote_json
+  notify: "create manager.yaml"
+

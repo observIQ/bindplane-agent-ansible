@@ -1,0 +1,29 @@
+---
+- name: Validate version
+  assert:
+    that: version is defined
+    msg: "Missing variable, 'version' is a required variable."
+
+- name: Validate endpoint
+  assert:
+    that: endpoint is defined
+    msg: "Missing variable, 'endpoint' is a required variable."
+
+- name: Validate secret_key
+  assert:
+    that: secret_key is defined
+    msg: "Missing variable, 'secret_key' is a required variable."
+
+- name: Validate agent_id
+  assert:
+    that: agent_id is defined
+    msg: "Missing variable, 'agent_id' is a required variable."
+
+- name: Validate labels
+  assert:
+    that: labels is defined
+    msg: "Missing variable, 'labels' is a required variable."
+
+- name: Call Linux specific playbook
+  include_tasks: linux.yml
+  when: ansible_os_family in ['Debian', 'RedHat', 'Suse']

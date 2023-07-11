@@ -1,0 +1,7 @@
+site.yml
+playbook.yml
+*.json
+.env
+gcp_sa_key.json
+ssh-key-ansible-sa
+ssh-key-ansible-sa.pub
