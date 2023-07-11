@@ -1,2 +1,3 @@
 ---
 package_state: 'present'
+install_dir: '/opt/observiq-otel-collector'
