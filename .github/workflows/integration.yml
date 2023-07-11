@@ -17,7 +17,9 @@ on:
 
 concurrency:
   group: ${{ github.head_ref || github.ref_name }}
-  cancel-in-progress: true
+  # Avoid canceling to allow compute instances to be deleted
+  # by the "Cleanup test instances" step.
+  cancel-in-progress: false
 
 env:
   GCP_PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
