@@ -6,7 +6,7 @@
     disable_gpg_check: true
   when: 
   - ansible_os_family == "RedHat"
-  notify: "restart observiq agent"
+  notify: "restart bindplane agent"
 
 - name: Install SUSE package
   zypper:
@@ -15,7 +15,7 @@
     disable_gpg_check: true
   when: 
   - ansible_os_family == "Suse"
-  notify: "restart observiq agent"
+  notify: "restart bindplane agent"
 
 - name: Install Debian package
   apt:
@@ -23,7 +23,7 @@
     state: present
   when: 
   - ansible_os_family == 'Debian'
-  notify: "restart observiq agent"
+  notify: "restart bindplane agent"
 
 # Store configuration options as a json file, changes to
 # this file will trigger an update to manager.yaml. If no
