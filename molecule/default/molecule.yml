@@ -17,6 +17,7 @@ platforms:
     image_family: projects/rhel-cloud/global/images/family/rhel-9
     machine_type: e2-small
     size_gb: 40
+    preemptible: true
     groups:
       - linux
       - rhel
@@ -24,6 +25,7 @@ platforms:
     image_family: projects/debian-cloud/global/images/family/debian-11
     machine_type: e2-small
     size_gb: 40
+    preemptible: true
     groups:
       - linux
       - debian
@@ -31,6 +33,7 @@ platforms:
     image_family: projects/suse-cloud/global/images/family/sles-15
     machine_type: e2-small
     size_gb: 40
+    preemptible: true
     groups:
       - linux
       - sles
