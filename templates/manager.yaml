@@ -10,4 +10,3 @@ tls_config:
   key_file: "{{ tlskey }}"
   ca_file: "{{ cacert }}"
   insecure_skip_verify: {{ insecure_skip_verify }}
-

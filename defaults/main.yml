@@ -3,6 +3,7 @@
 tlscert: ""
 tlskey: ""
 cacert: ""
+insecure_skip_verify: false
 
 package_type: "{{ 'rpm' if ansible_os_family in ['RedHat', 'Suse'] else 'deb' }}"
 arch: "{{ 'arm64' if ansible_architecture in ['arm64', 'aarch64'] else 'amd64' }}"
