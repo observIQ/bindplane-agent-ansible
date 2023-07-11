@@ -24,6 +24,7 @@ env:
   OPAMP_SECRET_KEY: ${{secrets.OPAMP_SECRET_KEY}}
   SSH_KEY_FILE: id_rsa
   SSH_USER: ${{secrets.SSH_USER}}
+  GCP_AUTH_KIND: serviceaccount
 
 jobs:
   integration:
@@ -47,10 +48,11 @@ jobs:
         uses: google-github-actions/auth@v1.1.1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
+          # when true, GOOGLE_APPLICATION_CREDENTIALS is set.
+          create_credentials_file: true
 
       - name: Deploy SSH Keypair
         run: |
-          USERNAME=$(whoami)
           echo "$SSH_PRIVATE_KEY" > id_rsa
           echo "$SSH_PUBLIC_KEY" > id_rsa.pub
           chmod -R 0600 id_rsa
