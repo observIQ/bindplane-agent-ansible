@@ -11,7 +11,7 @@
 # manager.json, which contains user configured options.
 - name: "create manager.yaml"
   template:
-    src: "manager.yaml"
+    src: "manager.yaml.tmpl"
     dest: "{{ install_dir }}/manager.yaml"
     mode: 0640
   notify: "restart bindplane agent"
