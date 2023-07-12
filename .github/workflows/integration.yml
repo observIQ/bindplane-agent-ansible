@@ -92,6 +92,9 @@ jobs:
         run: |
           molecule syntax -s ${{ matrix.scenario }}
 
+      - name: Create.
+        run: molecule create -s ${{ matrix.scenario }}
+
       - name: Converge.
         run: molecule converge -s ${{ matrix.scenario }}
 
