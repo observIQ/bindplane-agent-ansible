@@ -68,6 +68,31 @@ Deploy with:
 ansible-playbook playbook.yml -i ./site.yml
 ```
 
+## Specify a Configuration
+
+BindPlane OP server looks for the label `configuration` to determine which configuration
+should be pushed to the agent. Agents can be deployed without labels, however, if you would
+like Ansible to control the labels, you can set them.
+
+Update your `playbook.yml` file to include the `labels` option with the `configuration` key.
+```yaml
+- name: bindplane-agent
+  hosts: all
+  become: yes
+  roles:
+    - role: bindplane_agent
+      version: "1.28.0"
+      endpoint: "ws://localhost:3001/v1/opamp"
+      secret_key: "01H4P9QCXQNNQ1GE3BA34GR4EK"
+      labels: "configuration=my-config"
+```
+
+Deploy with:
+
+```bash
+ansible-playbook playbook.yml -i ./site.yml
+```
+
 ## TLS
 
 BindPlane Agent will connect to BindPlane OP using TLS when the endpoint parameter contains
@@ -82,6 +107,12 @@ the `wss` protocol.
       version: "1.28.0"
       endpoint: "wss://localhost:3001/v1/opamp"
       secret_key: "01H4P9QCXQNNQ1GE3BA34GR4EK"
+```
+
+Deploy with:
+
+```bash
+ansible-playbook playbook.yml -i ./site.yml
 ```
 
 If The BindPlane Agent does not already trust the BindPlane OP server certificate, you can configure
@@ -125,3 +156,8 @@ system.
       tlskey: /opt/tls/agent.key
 ```
 
+Deploy with:
+
+```bash
+ansible-playbook playbook.yml -i ./site.yml
+```
