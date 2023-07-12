@@ -1,19 +1,9 @@
 name: Integration Tests
 on: 
+  pull_request:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'docs/**'
-      - 'README.md'
-      - '.gitignore'
-      - 'LICENSE'
-  pull_request:
-    paths-ignore:
-      - 'docs/**'
-      - 'README.md'
-      - '.gitignore'
-      - 'LICENSE'
 
 concurrency:
   group: ${{ github.head_ref || github.ref_name }}
