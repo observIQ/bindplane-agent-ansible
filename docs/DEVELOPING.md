@@ -31,10 +31,10 @@ Google Cloud Service Account
 3. Create ssh keypair for service account
   - `ssh-keygen -f ssh-key-ansible-sa`
 4. Authenticate as the service account and bind the ssh keypair
-  - `gcloud auth activate-service-account --key-file=<pat to service account json key`
-  - `gcloud compute os-login ssh-keys add --key-file=ssh-key-ansible-sa.pub`
+  - `gcloud --project <project id> auth activate-service-account --key-file=<pat to service account json key`
+  - `gcloud --project <project id> compute os-login ssh-keys add --key-file=ssh-key-ansible-sa.pub`
 5. Get the service account's id to determine the ssh username
-  - `gcloud iam service-accounts describe <service account's email> --format='value(uniqueId)'`
+  - `gcloud --project <project id> iam service-accounts describe <service account's email> --format='value(uniqueId)'`
   - For example, id of `1066277234963989999` would be username: `sa_1066277234963989999`
 
 Export the following environment variables using a `.env` file in the repo's root directory:
