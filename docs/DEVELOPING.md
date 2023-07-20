@@ -16,6 +16,7 @@ export PATH=~/.local/bin:$PATH
 
 ansible-galaxy collection install google.cloud
 ansible-galaxy collection install community.crypto
+ansible-galaxy collection install ansible.windows
 ```
 
 Configure Project

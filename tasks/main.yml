@@ -17,3 +17,7 @@
 - name: Call Linux specific playbook
   include_tasks: linux.yml
   when: ansible_os_family in ['Debian', 'RedHat', 'Suse']
+
+- name: Call Windows specific playbook
+  include_tasks: windows.yml
+  when: ansible_os_family in ['Windows']

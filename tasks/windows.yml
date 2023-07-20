@@ -1,0 +1,20 @@
+# msiexec /i "https://github.com/observiq/observiq-otel-collector/releases/download/v1.29.1/observiq-otel-collector.msi" /quiet ENABLEMANAGEMENT=1 OPAMPENDPOINT=wss://app.bindplane.com/v1/opamp OPAMPSECRETKEY=01GR6ZD70WVPCTA0EFT6MMJZEK OPAMPLABELS=configuration=windows
+---
+- name: Install MSI package
+  ansible.windows.win_package:
+    # TODO(jsirianni): Use package_url var
+    path: "{{ windows_package_url }}"
+    product_id: D67CCA1A-6708-4096-8BDE-5069739FB861
+    # arguments: "/quiet ENABLEMANAGEMENT=1 OPAMPENDPOINT={{ endpoint }} OPAMPSECRETKEY={{ secret_key }} {{ \"OPAMPLABELS={{ labels }}\" if labels != \"\" }}"
+    arguments:
+      - /quiet 
+      - ENABLEMANAGEMENT=1 
+      - OPAMPENDPOINT={{ endpoint }}
+      - OPAMPSECRETKEY={{ secret_key }}
+      - OPAMPLABELS={{ labels if labels != "" }}
+      # TODO(jsirianni): Handle TLS. The bindplane-agent
+      # msi package does not support TLS at this time. TLS would
+      # need to be configured by the user with updates to the
+      # manager.yaml.
+    wait_for_children: true
+    state: present
