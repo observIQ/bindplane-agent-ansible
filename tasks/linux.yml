@@ -33,15 +33,21 @@
     group: root
     mode: 0755
 
-# Use environment variables to configure OpAMP instead of writing
-# a manager.yaml. This allows the BindPlane OP server to push changes
-# to the manager config without competing with Ansible.
-- name: "Create systemd environment override"
+- name: Check if manager configuration exists
+  stat:
+    path: /opt/observiq-otel-collector/manager.yaml
+  register: manager
+
+# Deploy initial manager configuration if it does not exist. BindPlane
+# will push updates to the manager configuration, therefor Ansible
+# cannot maintain it's state.
+- name: Create initial manager configuration
+  when: manager.stat.exists == False
   template:
-    src: "override.conf.tmpl"
-    dest: /etc/systemd/system/observiq-otel-collector.service.d/override.conf
-    owner: root
-    group: root
+    src: "manager.yaml.tmpl"
+    dest: /opt/observiq-otel-collector/manager.yaml
+    owner: observiq-otel-collector
+    group: observiq-otel-collector
     mode: 0640
   notify: "restart bindplane agent"
 

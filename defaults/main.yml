@@ -1,9 +1,9 @@
 ---
 # Variables that can be empty
 labels: ""
-tlscert: ""
-tlskey: ""
-cacert: ""
+cert_file: ""
+key_file: ""
+ca_file: ""
 insecure_skip_verify: false
 
 package_type: "{{ 'rpm' if ansible_os_family in ['RedHat', 'Suse'] else 'deb' }}"

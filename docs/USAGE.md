@@ -136,8 +136,8 @@ Alternatively, you can set the `insecure_skip_verify` option to `true` to skip T
 ## Mutual TLS
 
 BindPlane Agent will connect to BindPlane OP using TLS when the endpoint parameter contains
-the `wss` protocol. Mutual TLS will be used for TLS authentication when the `tlscert` and
-`tlskey` options are configured.
+the `wss` protocol. Mutual TLS will be used for TLS authentication when the `cert_file` and
+`key_file` options are configured.
 
 It is the users responsibility to deploy the certificate and private key files to the agent
 system.
@@ -152,8 +152,8 @@ system.
       endpoint: "wss://localhost:3001/v1/opamp"
       secret_key: "01H4P9QCXQNNQ1GE3BA34GR4EK"
       cacrt: /opt/tls/ca.crt
-      tlscert: /opt/tls/agent.crt
-      tlskey: /opt/tls/agent.key
+      cert_file: /opt/tls/agent.crt
+      key_file: /opt/tls/agent.key
 ```
 
 Deploy with:
