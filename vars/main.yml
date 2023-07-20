@@ -1,3 +1,2 @@
 ---
-package_state: 'present'
-install_dir: '/opt/observiq-otel-collector'
+manager_path: /opt/observiq-otel-collector/manager.yaml

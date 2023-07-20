@@ -1,5 +1,5 @@
 ---
-- name: "restart bindplane agent"
+- name: "restart systemd service"
   systemd:
     name: "observiq-otel-collector.service"
     state: restarted

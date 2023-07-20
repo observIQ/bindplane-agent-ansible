@@ -6,7 +6,7 @@
     disable_gpg_check: true
   when: 
   - ansible_os_family == "RedHat"
-  notify: "restart bindplane agent"
+  notify: "restart systemd service"
 
 - name: Install SUSE package
   zypper:
@@ -15,7 +15,7 @@
     disable_gpg_check: true
   when: 
   - ansible_os_family == "Suse"
-  notify: "restart bindplane agent"
+  notify: "restart systemd service"
 
 - name: Install Debian package
   apt:
@@ -23,19 +23,11 @@
     state: present
   when: 
   - ansible_os_family == 'Debian'
-  notify: "restart bindplane agent"
-
-- name: Create observiq-otel-collector.service.d directory
-  file:
-    path: /etc/systemd/system/observiq-otel-collector.service.d
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
+  notify: "restart systemd service"
 
 - name: Check if manager configuration exists
   stat:
-    path: /opt/observiq-otel-collector/manager.yaml
+    path: "{{ manager_path }}"
   register: manager
 
 # Deploy initial manager configuration if it does not exist. BindPlane
@@ -45,9 +37,9 @@
   when: manager.stat.exists == False
   template:
     src: "manager.yaml.tmpl"
-    dest: /opt/observiq-otel-collector/manager.yaml
+    dest: "{{ manager_path }}"
     owner: observiq-otel-collector
     group: observiq-otel-collector
     mode: 0640
-  notify: "restart bindplane agent"
+  notify: "restart systemd service"
 
