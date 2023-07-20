@@ -1,2 +1,3 @@
 ---
-manager_path: /opt/observiq-otel-collector/manager.yaml
+linux_manager_path: "/opt/observiq-otel-collector/manager.yaml"
+windows_manager_path: "C:/Program Files/observIQ OpenTelemetry Collector/manager.yaml"

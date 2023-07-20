@@ -8,5 +8,5 @@
 
 - name: "restart windows service"
   win_service:
-    name: spooler
+    name: "observIQ Distro for OpenTelemetry Collector"
     state: restarted

@@ -27,7 +27,7 @@
 
 - name: Check if manager configuration exists
   stat:
-    path: "{{ manager_path }}"
+    path: "{{ linux_manager_path }}"
   register: manager
 
 # Deploy initial manager configuration if it does not exist. BindPlane
@@ -37,7 +37,7 @@
   when: manager.stat.exists == False
   template:
     src: "manager.yaml.tmpl"
-    dest: "{{ manager_path }}"
+    dest: "{{ linux_manager_path }}"
     owner: observiq-otel-collector
     group: observiq-otel-collector
     mode: 0640

@@ -13,8 +13,8 @@
     state: present
 
 - name: Check if manager configuration exists
-  stat:
-    path: C:/observiq/observiq-otel-collector/manager.yaml
+  win_stat:
+    path: "{{ windows_manager_path }}"
   register: manager
 
 # Deploy initial manager configuration if it does not exist. BindPlane
@@ -24,7 +24,7 @@
   when: manager.stat.exists == False
   template:
     src: "manager.yaml.tmpl"
-    dest: C:/observiq/observiq-otel-collector/manager.yaml
+    dest: "{{ windows_manager_path }}"
     mode: 0640
   notify: "restart windows service"
 
