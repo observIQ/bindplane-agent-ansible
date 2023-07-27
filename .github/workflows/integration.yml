@@ -1,0 +1,96 @@
+name: Integration Tests
+on: 
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.head_ref || github.ref_name }}
+  # Avoid canceling to allow compute instances to be deleted
+  # by the "Cleanup test instances" step.
+  cancel-in-progress: false
+
+env:
+  GCP_PROJECT_ID: ${{secrets.GCP_PROJECT_ID}}
+  OPAMP_SECRET_KEY: ${{secrets.OPAMP_SECRET_KEY}}
+  SSH_KEY_FILE: id_rsa
+  SSH_USER: ${{secrets.SSH_USER}}
+  GCP_AUTH_KIND: serviceaccount
+
+jobs:
+  integration:
+    name: Molecule
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario:
+          # scenario names are derived from molecule scenarios
+          # at molecule/
+          - "default"
+    steps:
+      - name: Checkout the codebase.
+        uses: actions/checkout@v2
+
+      - name: Install Gcloud SDK
+        uses: google-github-actions/setup-gcloud@v1.1.1
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1.1.1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          # when true, GOOGLE_APPLICATION_CREDENTIALS is set.
+          create_credentials_file: true
+
+      - name: Deploy SSH Keypair
+        run: |
+          echo "$SSH_PRIVATE_KEY" > id_rsa
+          echo "$SSH_PUBLIC_KEY" > id_rsa.pub
+          chmod -R 0600 id_rsa
+          chmod -R 0600 id_rsa.pub
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+          SSH_PUBLIC_KEY: ${{secrets.SSH_PUBLIC_KEY}}
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+
+      # https://github.com/actions/cache/blob/main/examples.md#python---pip
+      - name: Cache Pip modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+        
+      - name: Install Pip Modules.
+        run: |
+          pip3 install -r requirements.txt
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+      - name: Install Galaxy Modules
+        run: |
+          ansible-galaxy collection install google.cloud
+          ansible-galaxy collection install community.crypto
+
+      - name: Lint.
+        run: |
+          molecule syntax -s ${{ matrix.scenario }}
+
+      - name: Converge.
+        run: molecule converge -s ${{ matrix.scenario }}
+
+      - name: Check Idempotence.
+        run: molecule idempotence -s ${{ matrix.scenario }}
+
+      - name: Verify.
+        run: molecule verify -s ${{ matrix.scenario }}
+
+      - name: Cleanup test instances.
+        run: molecule destroy -s ${{ matrix.scenario }}
+        if: ${{ always() }}

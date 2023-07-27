@@ -1,0 +1,8 @@
+endpoint: "{{ endpoint }}"
+secret_key: "{{ secret_key }}"
+labels: "{{ labels }}"
+tls_config:
+  cert_file: {{ cert_file if cert_file != "" }}
+  key_file: {{ key_file if key_file != "" }}
+  ca_file: {{ ca_file if ca_file != "" }}
+  insecure_skip_verify: {{ insecure_skip_verify }}

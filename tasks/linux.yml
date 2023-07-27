@@ -1,0 +1,45 @@
+---
+- name: Install RHEL package
+  yum:
+    name: "{{ package_url }}"
+    state: present
+    disable_gpg_check: true
+  when: 
+  - ansible_os_family == "RedHat"
+  notify: "restart systemd service"
+
+- name: Install SUSE package
+  zypper:
+    name: "{{ package_url }}"
+    state: present
+    disable_gpg_check: true
+  when: 
+  - ansible_os_family == "Suse"
+  notify: "restart systemd service"
+
+- name: Install Debian package
+  apt:
+    deb: "{{ package_url }}"
+    state: present
+  when: 
+  - ansible_os_family == 'Debian'
+  notify: "restart systemd service"
+
+- name: Check if manager configuration exists
+  stat:
+    path: "{{ manager_path }}"
+  register: manager
+
+# Deploy initial manager configuration if it does not exist. BindPlane
+# will push updates to the manager configuration, therefor Ansible
+# cannot maintain it's state.
+- name: Create initial manager configuration
+  when: manager.stat.exists == False
+  template:
+    src: "manager.yaml.tmpl"
+    dest: "{{ manager_path }}"
+    owner: observiq-otel-collector
+    group: observiq-otel-collector
+    mode: 0640
+  notify: "restart systemd service"
+
