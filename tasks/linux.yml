@@ -1,7 +1,7 @@
 ---
 - name: Install RHEL package
   yum:
-    name: "{{ package_url }}"
+    name: "{{ linux_package_url }}"
     state: present
     disable_gpg_check: true
   when: 
@@ -10,7 +10,7 @@
 
 - name: Install SUSE package
   zypper:
-    name: "{{ package_url }}"
+    name: "{{ linux_package_url }}"
     state: present
     disable_gpg_check: true
   when: 
@@ -19,7 +19,7 @@
 
 - name: Install Debian package
   apt:
-    deb: "{{ package_url }}"
+    deb: "{{ linux_package_url }}"
     state: present
   when: 
   - ansible_os_family == 'Debian'
