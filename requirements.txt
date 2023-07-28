@@ -1,4 +1,4 @@
-ansible == 5.4.0
+ansible == 8.2.0
 ansible-lint == 6.17.2
 molecule[ansible] == 5.1.0
 apache-libcloud == 3.7.0
