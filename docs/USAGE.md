@@ -44,6 +44,19 @@ Your directory stucture should look like this:
 └── site.yml
 ```
 
+**Windows**
+
+Windows targets must have `winrm` properly configured. See the
+[Ansible Documentation](https://docs.ansible.com/ansible/latest/os_guide/windows_setup.html)
+for proper configuration.
+
+To get started quickly for testing purposes only, you can run the following commands
+to configure winrm quickly, but in an insecure way:
+```ps
+winrm set winrm/config/service/auth '@{Basic="true"}'
+winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+```
+
 ## Basic Example
 
 This example assumes you have a BindPlane OP instance at the endpoint
