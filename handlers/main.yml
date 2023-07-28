@@ -5,3 +5,8 @@
     state: restarted
     daemon_reload: true
     enabled: yes
+
+- name: "restart windows service"
+  win_service:
+    name: "observIQ Distro for OpenTelemetry Collector"
+    state: restarted
