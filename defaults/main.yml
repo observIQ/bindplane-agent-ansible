@@ -8,4 +8,5 @@ insecure_skip_verify: false
 
 package_type: "{{ 'rpm' if ansible_os_family in ['RedHat', 'Suse'] else 'deb' }}"
 arch: "{{ 'arm64' if ansible_architecture in ['arm64', 'aarch64'] else 'amd64' }}"
-package_url: "https://github.com/observIQ/observiq-otel-collector/releases/download/v{{ version }}/observiq-otel-collector_v{{ version }}_linux_{{ arch }}.{{ package_type }}"
+linux_package_url: "https://github.com/observIQ/bindplane-agent/releases/download/v{{ version }}/observiq-otel-collector_v{{ version }}_linux_{{ arch }}.{{ package_type }}"
+windows_package_url: "https://github.com/observIQ/bindplane-agent/releases/download/v{{ version }}/observiq-otel-collector.msi"

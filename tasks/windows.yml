@@ -1,0 +1,27 @@
+---
+- name: Install MSI package
+  ansible.windows.win_package:
+    path: "{{ windows_package_url }}"
+    # Install without opamp. OpAMP will be configured when the manager
+    # configuration is deployed.
+    arguments:
+      - /quiet 
+      - ENABLEMANAGEMENT=0
+    wait_for_children: true
+    state: present
+
+- name: Check if manager configuration exists
+  win_stat:
+    path: "{{ windows_manager_path }}"
+  register: manager
+
+# Deploy initial manager configuration if it does not exist. BindPlane
+# will push updates to the manager configuration, therefor Ansible
+# cannot maintain it's state.
+- name: Create initial manager configuration
+  when: manager.stat.exists == False
+  template:
+    src: "manager.yaml.tmpl"
+    dest: "{{ windows_manager_path }}"
+    mode: 0640
+  notify: "restart windows service"
