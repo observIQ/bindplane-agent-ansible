@@ -2,7 +2,6 @@
 - name: Install MSI package
   ansible.windows.win_package:
     path: "{{ windows_package_url }}"
-    product_id: D67CCA1A-6708-4096-8BDE-5069739FB861
     # Install without opamp. OpAMP will be configured when the manager
     # configuration is deployed.
     arguments:
