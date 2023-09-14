@@ -1,6 +1,6 @@
 ansible == 8.4.0
 ansible-lint == 6.19.0
-molecule[ansible] == 5.1.0
+molecule[ansible] == 6.0.2
 apache-libcloud == 3.8.0
 pycrypto == 2.6.1
 google-auth == 2.22.0
