@@ -3,5 +3,5 @@ ansible-lint == 6.19.0
 molecule[ansible] == 5.1.0
 apache-libcloud == 3.8.0
 pycrypto == 2.6.1
-google-auth == 2.22.0
+google-auth == 2.23.4
 molecule-plugins[gce]
