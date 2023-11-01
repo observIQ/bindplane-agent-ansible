@@ -1,5 +1,5 @@
 ansible == 8.4.0
-ansible-lint == 6.19.0
+ansible-lint == 6.21.1
 molecule[ansible] == 5.1.0
 apache-libcloud == 3.8.0
 pycrypto == 2.6.1
