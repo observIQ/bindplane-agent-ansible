@@ -1,5 +1,5 @@
 ansible == 9.6.0
-ansible-lint == 24.5.0
+ansible-lint == 24.6.1
 molecule[ansible] == 5.1.0
 apache-libcloud == 3.8.0
 google-auth == 2.29.0
